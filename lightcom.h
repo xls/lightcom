@@ -2,6 +2,20 @@
 #include <memory.h>
 
 
+#ifdef COM_NO_VTABLE
+    #if defined(__clang__)
+    #define LCOMDECL __declspec(novtable)
+    #elif defined(__GNUC__) || defined(__GNUG__)
+    #define LCOMDECL
+    #elif defined(_MSC_VER)
+    #define LCOMDECL __declspec(novtable)
+    #else
+    #define LCOMDECL 
+    #endif
+#else
+#define LCOMDECL 
+#endif
+
 
 #ifdef USE_WIN_COM
     #include <windows.h>
@@ -57,10 +71,18 @@
 
 const IID IID_IUnknown = { 0x00000000, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46 };
 
-class __declspec(novtable) IUnknown
+class LCOMDECL IUnknown
 {
 public:
     virtual HRESULT  __stdcall QueryInterface(const IID *riid, void **ppv) = 0;
     virtual uint32_t __stdcall AddRef() = 0;
     virtual uint32_t __stdcall Release() = 0;
+};
+
+const IID IID_IDisposable = { 0x805D7A98, 0xD4AF, 0x3F0F, 0x96,0x7F, 0xE5, 0xCF, 0x45,0x31, 0x2D, 0x2C};
+
+class LCOMDECL IDisposable : public IUnknown
+{
+public:
+    virtual void __stdcall Dispose() = 0;
 };
