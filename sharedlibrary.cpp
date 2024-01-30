@@ -18,9 +18,8 @@
 const IID IID_ILightComClass =
 { 0x7ba9d65a, 0xd575, 0x460a, { 0x8d, 0x95, 0x3c, 0x3b, 0xda, 0xaa, 0x57, 0x79 } };
 
-class LCOMDECL ILightComClass : public IUnknown
+struct LCOMDECL ILightComClass : IUnknown
 {
-public:
     virtual HRESULT __stdcall DoSomething(const wchar_t* name) = 0;
     virtual HRESULT __stdcall DoSomething2(const char* name) = 0;
 };

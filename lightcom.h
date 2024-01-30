@@ -71,7 +71,7 @@
 
 const IID IID_IUnknown = { 0x00000000, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46 };
 
-class LCOMDECL IUnknown
+struct LCOMDECL IUnknown
 {
 public:
     virtual HRESULT  __stdcall QueryInterface(const IID *riid, void **ppv) = 0;
@@ -81,7 +81,7 @@ public:
 
 const IID IID_IDisposable = { 0x805D7A98, 0xD4AF, 0x3F0F, 0x96,0x7F, 0xE5, 0xCF, 0x45,0x31, 0x2D, 0x2C};
 
-class LCOMDECL IDisposable : public IUnknown
+struct LCOMDECL IDisposable : public IUnknown
 {
 public:
     virtual void __stdcall Dispose() = 0;
