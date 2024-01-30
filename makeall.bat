@@ -22,8 +22,8 @@ if Exist "%MINGW64%\g++.exe" (
 Setlocal
 echo [34mFound Mingw64 - compiling[0m
 set "PATH=%PATH%;%MINGW64%"
-g++  -static-libgcc -static-libstdc++ -gdwarf -m64 -o shared-gcc-d-x64.dll   sharedlibrary.cpp -Wl,-subsystem,windows
-g++  -static-libgcc -static-libstdc++ -gdwarf -m64 -O2 -o shared-gcc-r-x64.dll   sharedlibrary.cpp -Wl,-subsystem,windows
+g++  -mdll -static-libstdc++ -static -gdwarf -m64 -o shared-gcc-d-x64.dll   sharedlibrary.cpp -Wl,-subsystem,windows
+g++  -mdll -static-libstdc++ -static -gdwarf -m64 -O2 -o shared-gcc-r-x64.dll   sharedlibrary.cpp -Wl,-subsystem,windows
 
 rem cv2pdb from https://github.com/rainers/cv2pdb
 for %%X in (cv2pdb64.exe) do (set FOUND=%%~$PATH:X)
